@@ -4,6 +4,8 @@ require('dotenv').config();
 const cors = require("cors");
 const connectDB = require('./config/db');
 
+
+
 // Models 
 const Candidate = require('./models/Candidate');
 const Recruiter = require('./models/Recruiter');
@@ -30,10 +32,18 @@ app.get('/', (req, res) => {
     res.send('Server is running...');
 });
 
-
-
-
-
 app.listen(PORT, () => {
     console.log(`🚀 Server listening on port ${PORT}`);
 });
+
+
+// create a candidate 
+const candidateRoutes = require('./routes/candidateRoutes');
+app.use('/api/candidate', candidateRoutes);
+
+// create a recruiter
+const recruiterRoutes = require('./routes/recruiterRoutes');
+app.use('/api/recruiter', recruiterRoutes);
+
+
+
