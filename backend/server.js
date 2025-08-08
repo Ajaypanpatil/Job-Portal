@@ -12,7 +12,7 @@ const Recruiter = require('./models/Recruiter');
 const Job = require('./models/Job');
 const Application = require('./models/Application');
 
-const errorHandlers = require('./middleware/errorHandler');
+const errorHandlers = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -37,13 +37,19 @@ app.listen(PORT, () => {
 });
 
 
-// create a candidate 
-const candidateRoutes = require('./routes/candidateRoutes');
-app.use('/api/candidate', candidateRoutes);
 
-// create a recruiter
-const recruiterRoutes = require('./routes/recruiterRoutes');
-app.use('/api/recruiter', recruiterRoutes);
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
+
+const candidateRoute = require('./routes/candidateRoutes');
+app.use('/api/candidate', candidateRoute);
+
+const recruiterRoutes = require("./routes/recruiterRoutes");
+app.use("/api/recruiter", recruiterRoutes);
+
+
+
 
 
 
